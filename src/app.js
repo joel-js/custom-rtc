@@ -1,9 +1,9 @@
 const cameraId = import.meta.env.VITE_CAMERA_ID;
-const ticket = import.meta.env.VITE_TICKET;
+const session = import.meta.env.VITE_SESSION;
 const serverPort = import.meta.env.VITE_SERVER_PORT;
 
-const url = (cameraId, ticket) =>
-  `wss://${serverPort}/rest/v3/devices/${cameraId}/webrtc?_ticket=${ticket}`;
+const url = (cameraId) =>
+  `wss://${serverPort}/rest/v3/devices/${cameraId}/webrtc`;
 
 const iceServers = [
   { urls: "stun:stun.stunprotocol.org:3478" },
@@ -98,8 +98,8 @@ const initPeerConnection = (iceServers) => {
   return pc;
 };
 
-const initSocket = (cameraId, ticket) => {
-  const signalWS = new WebSocket(url(cameraId, ticket));
+const initSocket = (cameraId, session) => {
+  const signalWS = new WebSocket(url(cameraId), [session]);
 
   signalWS.onopen = () => {
     console.log("WebSocket connected successfully");
@@ -117,7 +117,7 @@ const initSocket = (cameraId, ticket) => {
 
 const main = () => {
   const peerConnection = initPeerConnection(iceServers);
-  const signalWS = initSocket(cameraId, ticket);
+  const signalWS = initSocket(cameraId, session);
 
   handlePeerConnections(peerConnection, signalWS);
 
