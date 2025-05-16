@@ -7,7 +7,7 @@
 ## .env file
 
 * Create a `.env` file.
-* Add `VITE_CAMERA_ID` (cameraID), `VITE_TICKET` (authorization ticket), `VITE_SERVER_PORT`(server ip:port)
+* Add `VITE_CAMERA_ID` (cameraID), `VITE_SESSION` (session token), `VITE_SERVER_PORT`(server ip:port)
 
 ## Run
 
