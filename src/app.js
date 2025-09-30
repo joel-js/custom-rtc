@@ -3,7 +3,7 @@ const ticket = import.meta.env.VITE_TICKET;
 const serverPort = import.meta.env.VITE_SERVER_PORT;
 
 const url = (cameraId, ticket) =>
-  `wss://${serverPort}/rest/v3/devices/${cameraId}/webrtc?_ticket=${ticket}`;
+  `wss://${serverPort}/rest/v3/devices/${cameraId}/webrtc?token=${ticket}&stream=primary`;
 
 const iceServers = [
   { urls: "stun:stun.stunprotocol.org:3478" },
